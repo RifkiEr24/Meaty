@@ -1,0 +1,14 @@
+@import "./_mixins.scss";
+@import "./_variables.scss";
+// GLOBAL STYLE
+.container{
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.flex{
+    display: flex;
+}
+.text-center{
+    text-align: center;
+}

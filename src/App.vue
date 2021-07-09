@@ -14,8 +14,6 @@ export default {
 }
 </script>
 <style lang="scss">
-@import "./scss/_mixins.scss";
-@import "./scss/_variables.scss";
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 *{
@@ -26,6 +24,7 @@ font-family: 'Poppins', sans-serif;
 }
 
 body{
+    color: #2B2B2B;
     background-color: #EDEDED;
     margin: 0;
     padding: 0;

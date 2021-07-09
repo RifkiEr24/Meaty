@@ -2,7 +2,7 @@
   <header>
     <nav class="nav p-1" id="drawer">
       <div class="brand">
-          <p class="brand-name p-1">VarRestaurant</p>
+          <p class="brand-name p-1">Meathycal</p>
       </div>
         <ul>
             <li class="nav-item "><a class="nav-link" href="#">Home</a></li>

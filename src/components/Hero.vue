@@ -1,8 +1,8 @@
 <template>
   <div class="hero">
       <div class="hero-text">
-          <h1>VarRestaurant</h1>
-          <p>Every Variant Country Food in One Place!</p>
+          <h1>Meathycal</h1>
+          <p>Best Meat Based Food You Ever Meet ! </p>
       </div>
   </div>
 </template>

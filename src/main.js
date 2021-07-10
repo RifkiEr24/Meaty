@@ -5,7 +5,6 @@ import App from "./App.vue";
 import router from "./router";
 import "./scss/main.scss";
 Vue.use(VueAxios, axios)
-console.log(axios.defaults);
 
 new Vue({
   router,

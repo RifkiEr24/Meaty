@@ -36,6 +36,11 @@ import FoodItem from '../components/FoodItem.vue'
       Hero,
       FoodItem
     },
+    computed:{
+      products(){
+        return this.$store.state.products;
+      }
+    },
     methods: {
       callBeef() {
         this.axios.get(this.endpoint.foodlist('beef')).then((response) => {

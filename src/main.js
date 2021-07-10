@@ -4,7 +4,7 @@ import VueAxios from 'vue-axios'
 import App from "./App.vue";
 import router from "./router";
 import "./scss/main.scss";
-import store from './store'
+import store from './store/store'
 
 Vue.use(VueAxios, axios)
 

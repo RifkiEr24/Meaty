@@ -1,11 +1,14 @@
 <template>
   <header>
-    <nav class="nav p-1" id="drawer">
+    <nav class="nav p-1" id="drawer" :class="{ 'bg-primary': $route.path !== '/' }">
       <div class="brand">
           <p class="brand-name p-1">Meathycal</p>
       </div>
         <ul>
-            <li class="nav-item "><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item "><router-link :to="'/'">Home</router-link></li>
+            <li class="nav-item "> <router-link :to="'about'">Home</router-link></li>
+           
+
             <li class="nav-item "><a class="nav-link" href="#">Gallery</a></li>
             <li class="nav-item "><a class="nav-link" href="#">Cart</a></li>
         </ul>
@@ -34,6 +37,7 @@ nav{
     background-color: #2B2B2B;
     justify-content: space-between;
     align-items: center;
+    transition: background-color 0.3s ease;
      @include tablet {
          background-color: transparent;
         }

@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav class="nav p-1" id="drawer" :class="{ 'bg-primary': $route.path !== '/' }">
+    <nav v-scroll="updateScroll" class="nav p-1" id="drawer"  :class="{ 'bg-primary': $route.path !== '/' || scrollPosition > 20}">
       <div class="brand">
           <p class="brand-name p-1">Meathycal</p>
       </div>
@@ -19,10 +19,24 @@
 </template>
 
 <script>
-
 export default {
+  name: 'Navbar',
+  data(){
+    return{
+      scrollPosition: null,  
+    }
+  },
+  methods: {
 
-}
+     updateScroll() {
+       this.scrollPosition = window.scrollY
+    }
+    
+  },
+  mounted(){
+        window.addEventListener('scroll', this.updateScroll);
+  }
+};
 </script>
 
 <style lang="scss" >

@@ -7,7 +7,17 @@ import "./scss/main.scss";
 import store from './store/store'
 
 Vue.use(VueAxios, axios)
-
+//Create New Directive for scroll
+Vue.directive('scroll', {
+  inserted: function (el, binding) {
+    let f = function (evt) {
+      if (binding.value(evt, el)) {
+        window.removeEventListener('scroll', f)
+      }
+    }
+    window.addEventListener('scroll', f)
+  }
+})
 new Vue({
   router,
   store,

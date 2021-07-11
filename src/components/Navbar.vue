@@ -6,7 +6,7 @@
       </div>
         <ul>
             <li class="nav-item "><router-link :to="'/'">Home</router-link></li>
-            <li class="nav-item "> <router-link :to="'about'">Home</router-link></li>
+            <li class="nav-item "> <router-link :to="'about'">Menu</router-link></li>
            
 
             <li class="nav-item "><a class="nav-link" href="#">Gallery</a></li>

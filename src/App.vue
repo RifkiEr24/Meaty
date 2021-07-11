@@ -5,17 +5,29 @@
         name="fade"
         mode="out-in"
       >
-        <router-view/>
+        <router-view :class="{ 'pt-10': $route.path !== '/' }"/>
       </transition>
   </div>
 </template>
 <script>
 import Navbar from './components/Navbar.vue';
-
+import { mapActions} from 'vuex';
 export default {
      components: {
     Navbar
   },
+  mounted(){
+   this.loadFoodBeef();
+  this.loadFoodChicken();
+  this.loadFoodLamb();
+  this.loadFoodPork();
+  },
+  computed: {
+
+  },
+  methods:{
+ ...mapActions(["loadFoodBeef","loadFoodChicken","loadFoodLamb","loadFoodPork"])
+  }
 }
 </script>
 <style lang="scss">

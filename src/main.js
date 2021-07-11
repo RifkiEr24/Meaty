@@ -5,6 +5,7 @@ import App from "./App.vue";
 import router from "./router";
 import "./scss/main.scss";
 import store from './store/store'
+require('vue2-animate/dist/vue2-animate.min.css')
 
 Vue.use(VueAxios, axios)
 //Create New Directive for scroll

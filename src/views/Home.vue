@@ -2,7 +2,7 @@
   <div class="home">
     <hero />
     <div class="container">
-      <h2 class="mt-4 text-center">Menu Makanan</h2>
+      <h2 class="mt-4 text-center">Restaurant Menu</h2>
       <div class="food-container">
         <h2 class="mt-4 text-center ">Beef</h2>
         <div class="food-list flex">

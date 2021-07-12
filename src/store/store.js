@@ -6,7 +6,8 @@ Vue.use(Vuex, axios);
 
 export default new Vuex.Store({
     state: {
-        food: []
+        food: [],
+        cart:[]
     },
     getters: {
         foodBeef: state => {
@@ -37,6 +38,27 @@ export default new Vuex.Store({
     mutations: {
         SET_FOOD(state, food) {
             state.food.push(...food);
+        },
+        ADD_TO_CART(state,{product, quantity}){
+            let productInCart = state.cart.find(item => {
+                return item.product.idMeal === product.idMeal
+            })
+            if(productInCart){
+                productInCart.quantity += quantity
+                return;
+            }
+            state.cart.push({
+                product,
+                quantity
+            })
+        },
+        REMOVE_PRODUCT_FROM_CART(state, product){
+            state.cart = state.cart.filter(item => {
+                return item.product.idMeal !== product.idMeal
+            })
+        },
+        CLEAR_CART_ITEMS(state){
+            state.cart = [];
         }
     },
     actions: {
@@ -103,6 +125,15 @@ export default new Vuex.Store({
                 .catch(error => {
                     console.log(error)
                 })
+        },
+        addProductToCart({commit},{product, quantity}){
+            commit('ADD_TO_CART',{product, quantity})
+        },
+        removeProductFromCart({commit},product){
+            commit('REMOVE_PRODUCT_FROM_CART',product)
+        },
+        clearCartItems({commit}){
+            commit('CLEAR_CART_ITEMS')
         }
     },
     modules: {}

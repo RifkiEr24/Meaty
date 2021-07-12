@@ -7,7 +7,7 @@
         <h2 class="mt-4 text-center ">Beef</h2>
         <div class="food-list flex">
           <div class="food-item p-1" v-for="item in beef.slice(0,8)" :key="item.id">
-            <food-item :idMeal="item.idMeal" :strMeal="item.strMeal" :strMealThumb="item.strMealThumb" />
+            <food-item :food="item"/>
           </div>
         </div>
       </div>
@@ -15,23 +15,23 @@
         <h2 class="mt-4 text-center ">Chicken</h2>
         <div class="food-list flex">
           <div class="food-item p-1" v-for="item in chicken.slice(0,8)" :key="item.id">
-            <food-item :idMeal="item.idMeal" :strMeal="item.strMeal" :strMealThumb="item.strMealThumb" />
+            <food-item :food="item"/>
           </div>
         </div>
       </div>
       <div class="food-container">
         <h2 class="mt-4 text-center ">Lamb</h2>
         <div class="food-list flex">
-          <div class="food-item p-1" v-for="item in lamb.slice(0,8)" :key="item.id">
-            <food-item :idMeal="item.idMeal" :strMeal="item.strMeal" :strMealThumb="item.strMealThumb" />
+           <div class="food-item p-1" v-for="item in lamb.slice(0,8)" :key="item.id">
+            <food-item :food="item"/>
           </div>
         </div>
       </div>
       <div class="food-container">
         <h2 class="mt-4 text-center ">Pork</h2>
         <div class="food-list flex">
-          <div class="food-item p-1" v-for="item in pork.slice(0,8)" :key="item.id">
-            <food-item :idMeal="item.idMeal" :strMeal="item.strMeal" :strMealThumb="item.strMealThumb" />
+           <div class="food-item p-1" v-for="item in pork.slice(0,8)" :key="item.id">
+            <food-item :food="item"/>
           </div>
         </div>
       </div>
@@ -48,7 +48,6 @@
   export default {
     data() {
       return {
-        food: ['Beef,']
       }
     },
     components: {
@@ -56,6 +55,7 @@
       FoodItem
     },
     computed: {
+     
       ...mapGetters({
         beef: "foodBeef",
         chicken: "foodChicken",

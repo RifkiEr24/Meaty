@@ -1,27 +1,22 @@
 <template>
   <div class="food-card bg-primary">
-    <img :src="strMealThumb" alt="">  
-      <h4 class="text-center pt-2 pb-2">{{strMeal}}</h4>
-      <button class=""> <span class="iconify" data-icon="bi:cart-plus" data-inline="false"></span> Add To Cart</button>
+    <img :src="food.strMealThumb" alt="">  
+      <h4 class="text-center pt-2 pb-2">{{food.strMeal}}</h4>
+      <button class="" @click="addToCart()"> <span class="iconify" data-icon="bi:cart-plus" data-inline="false"></span> Add To Cart</button>
   </div>
 </template>
 
 <script>
 export default {
-    props: {
-        idMeal: {
-            type: String,
-            required: true
-        },
-        strMeal: {
-            type: String,
-            required: true
-        },
-        strMealThumb: {
-            type: String,
-            required: true
+    props: ["food"],
+    methods:{
+        addToCart(){
+            this.$store.dispatch('addProductToCart',{
+                product:this.food,
+                quantity: 1
+            })
         }
-    },
+    }
 }
 </script>
 

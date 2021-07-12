@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <select @change="onChange($event)" name="" id="">
       <option value="all">All</option>
       <option value="beef">Beef</option>
@@ -7,10 +7,15 @@
       <option value="lamb">Lamb</option>
       <option value="pork">Pork</option>
     </select>
-    <div class="food-list flex">
-          <div class="food-item p-1" v-for="item in allFood" :key="item.idMeal">
-            <food-item :idMeal="item.idMeal" :strMeal="item.strMeal" :strMealThumb="item.strMealThumb" />
+    <input type="text" v-model="searchFood">
+   <p>{{searchFood}}</p> 
+    <div >
+      <transition-group name="fade" class="food-list flex" tag="div">
+
+          <div class="food-item p-1" v-for="item in filteredData" :key="item.idMeal" style="animation-duration: 0.3s">
+            <food-item :food="item" />
           </div>
+      </transition-group>
         </div>
   </div>
 </template>
@@ -22,11 +27,13 @@ export default {
 data() {
       return {
         allFood: [],
-        currentFood:''
+        searchFood:'',
       }
     },
     computed: {
-
+       filteredData() {
+    return this.allFood.filter(food => food.strMeal.toLowerCase().includes(this.searchFood.toLowerCase()))
+  }
     },
     mounted(){
      this.allFood=this.$store.state.food;
@@ -38,18 +45,23 @@ data() {
            this.allFood=this.$store.getters.foodBeef;
          }
          else if(event.target.value === "chicken"){
+
            this.allFood=this.$store.getters.foodChicken;
          }
         else if(event.target.value === "lamb"){
+
            this.allFood=this.$store.getters.foodLamb;
          }
          else if(event.target.value === "pork"){
+
            this.allFood=this.$store.getters.foodPork;
          }
            else if(event.target.value === "all"){
+
            this.allFood=this.$store.state.food;
          }
-    }
+    },
+
     }
 }
 </script>

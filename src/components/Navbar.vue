@@ -10,7 +10,22 @@
            
 
             <li class="nav-item "><a class="nav-link" href="#">Gallery</a></li>
-            <li class="nav-item "><a class="nav-link" href="#">Cart</a></li>
+            <li class="nav-item dropdown"><a class="nav-link" href="#">Cart</a>
+               <div class="dropdown-content text-primary p-2">
+                <div v-if="cart.length === 0">
+                  <p class="text-center">Oops.. Your Cart Still Empty</p>
+                </div>
+                <div v-else>
+                   <review-item  v-for="item in cart" :key="item.id" :cartItem="item"></review-item>
+                 <div class="cart-item-footer">
+                   <button @click="clearCartItems" class="bg-primary p-1 ">Clear Cart</button>
+                 </div>
+                </div>
+                
+            
+              </div>
+            </li>
+           
         </ul>
          <a id="hamburger" aria-label="Hamburger">☰</a>
     </nav>
@@ -19,17 +34,27 @@
 </template>
 
 <script>
+import ReviewItem from './ReviewItem.vue';
 export default {
   name: 'Navbar',
+  components:{   ReviewItem },
   data(){
-    return{
+   return{
       scrollPosition: null,  
     }
+  },
+  computed :{
+     cart(){
+        return this.$store.state.cart;
+      },
   },
   methods: {
 
      updateScroll() {
        this.scrollPosition = window.scrollY
+    },
+    clearCartItems(){
+      this.$store.dispatch("clearCartItems");
     }
     
   },
@@ -39,9 +64,41 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+button{
+  border: 0;
+  color: white;
+  border-radius: 5px;
+}
+</style>
 <style lang="scss" >
 @import "./../scss/_mixins.scss";
 
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 10px;
+  background-color: #f9f9f9;
+  min-width: 350px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 nav{
     color: white;
     display: flex;
@@ -51,7 +108,8 @@ nav{
     background-color: #2B2B2B;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 1s ease;
+    z-index: 10;
      @include tablet {
          background-color: transparent;
         }

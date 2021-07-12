@@ -2,12 +2,17 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios';
 import data from './../data/api-endpoint'
+import VuexPersistence from 'vuex-persist'
+const vuexLocal = new VuexPersistence({
+    storage: window.localStorage,
+    reducer: (state) => ({ cart: state.cart }), //only save navigation module
+  })
 Vue.use(Vuex, axios);
 
 export default new Vuex.Store({
     state: {
         food: [],
-        cart:[]
+        cart:[],
     },
     getters: {
         foodBeef: state => {
@@ -33,6 +38,9 @@ export default new Vuex.Store({
                 return food.ctr === "pork";
             })
             return foodLamb;
+        },
+        cartItemCount: state =>{
+          return state.cart.length;  
         }
     },
     mutations: {
@@ -136,5 +144,6 @@ export default new Vuex.Store({
             commit('CLEAR_CART_ITEMS')
         }
     },
+    plugins: [vuexLocal.plugin],
     modules: {}
 })

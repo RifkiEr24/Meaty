@@ -1,5 +1,6 @@
 <template>
   <div class="food-card bg-primary">
+      
     <img :src="food.strMealThumb" alt="">  
       <h4 class="text-center pt-2 pb-2">{{food.strMeal}}</h4>
       <button class="" @click="addToCart()"> <span class="iconify" data-icon="bi:cart-plus" data-inline="false"></span> Add To Cart</button>
@@ -7,12 +8,14 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex';
 export default {
     props: ["food"],
     methods:{
+        ...mapActions(['addProductToCart']),
         addToCart(){
-            this.$store.dispatch('addProductToCart',{
-                product:this.food,
+            this.addProductToCart({
+                 product:this.food,
                 quantity: 1
             })
         }

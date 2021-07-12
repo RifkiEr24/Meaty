@@ -8,7 +8,7 @@
         <p>x {{cartItem.quantity}} pcs</p>
     </div>
     <button @click="removeProductFromCart(cartItem.product)">
-            <span class="iconify text-primary remove-item"  data-icon="bi:x-square-fill" data-inline="false"></span>
+            <span class="iconify text-primary remove-item"  data-icon="clarity:trash-solid" data-inline="false"></span>
 
     </button>
 </div>
@@ -19,7 +19,6 @@
 export default {
     props: ["cartItem"],
     created(){
-        console.log(this.cartItem);
     },
     methods:{
         removeProductFromCart(product){
@@ -30,20 +29,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-button{
-    border: 0;
-    margin-left: auto;
-}
-.cart-item{
+.cart-item {
     align-items: center;
-}
-.img-food{
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-}
-.remove-item{
-  width: 30px;
-    height: 30px;  
+
+    button {
+        border: 0;
+        margin-left: auto;
+        background-color: transparent;
+        .remove-item {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    .img-food {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+    }
 }
 </style>

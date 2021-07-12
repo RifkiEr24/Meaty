@@ -41,13 +41,30 @@ export default new Vuex.Store({
         },
         cartItemCount: state =>{
           return state.cart.length;  
-        }
+        },
+        selectedCart: state => {
+            const selectedCart = state.cart.filter(cart => {
+                return cart.selected === true;
+            })
+            return selectedCart;
+        },
+        cartItemSelectedCount: state =>{
+            
+            const selectedCart = state.cart.filter(cart => {
+                return cart.selected === true;
+            }).map(item=>{
+               return item.quantity
+            }).reduce((prev, curr) => prev + curr, 0);
+            return selectedCart;
+            // return state.cart.length;  
+          }
     },
     mutations: {
         SET_FOOD(state, food) {
             state.food.push(...food);
         },
         ADD_TO_CART(state,{product, quantity}){
+            const selected= true;
             let productInCart = state.cart.find(item => {
                 return item.product.idMeal === product.idMeal
             })
@@ -57,7 +74,8 @@ export default new Vuex.Store({
             }
             state.cart.push({
                 product,
-                quantity
+                quantity,
+                selected
             })
         },
         REMOVE_PRODUCT_FROM_CART(state, product){
@@ -65,9 +83,38 @@ export default new Vuex.Store({
                 return item.product.idMeal !== product.idMeal
             })
         },
+        INCREASE_CART_QUANTITY(state,{product, quantity}){
+            console.log(product);
+            let productInCart = state.cart.find(item => {
+                return item.product.idMeal === product.idMeal
+            })
+            productInCart.quantity += quantity
+        },
+        DECREASE_CART_QUANTITY(state,{product, quantity}){
+            console.log(product);
+            let productInCart = state.cart.find(item => {
+                return item.product.idMeal === product.idMeal
+            })
+            productInCart.quantity -= quantity
+        },
+        CHANGE_CART_QUANTITY(state,{product, quantity}){
+            
+            let productInCart = state.cart.find(item => {
+                return item.product.idMeal === product.idMeal
+            })
+            productInCart.quantity = quantity
+        },
+        TOGGLE_SELECTED_CART(state,{product, selected}){
+            let productInCart = state.cart.find(item => {
+                return item.product.idMeal === product.idMeal
+            })
+            productInCart.selected = selected
+        },
         CLEAR_CART_ITEMS(state){
             state.cart = [];
-        }
+        },
+        
+    
     },
     actions: {
         loadFoodChicken({
@@ -142,6 +189,18 @@ export default new Vuex.Store({
         },
         clearCartItems({commit}){
             commit('CLEAR_CART_ITEMS')
+        },
+        increaseProductCartQuantity({commit},{product, quantity}){
+            commit('INCREASE_CART_QUANTITY',{product, quantity})
+        },
+        decreaseProductCartQuantity({commit},{product, quantity}){
+            commit('DECREASE_CART_QUANTITY',{product, quantity})
+        },
+        changeProductCartQuantity({commit},{product, quantity}){
+            commit('CHANGE_CART_QUANTITY',{product, quantity})
+        },
+        toggleSelectedCart({commit},{product, selected}){
+            commit('TOGGLE_SELECTED_CART',{product, selected})
         }
     },
     plugins: [vuexLocal.plugin],

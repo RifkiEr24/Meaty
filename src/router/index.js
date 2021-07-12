@@ -16,6 +16,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "menu" */ "../views/Menu.vue"),
   },
+  {
+    path: "/cart",
+    name: "Cart",
+    component: () =>
+      import(/* webpackChunkName: "menu" */ "../views/Cart.vue"),
+  },
 ];
 
 const router = new VueRouter({

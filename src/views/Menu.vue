@@ -37,7 +37,6 @@ data() {
     },
     mounted(){
      this.allFood=this.$store.state.food;
-     console.log(this.allFood); 
     },
     methods:{
        onChange:function(event){

@@ -32,15 +32,4 @@ export default {
         text-align: center;
     }
 }
-.hero-img{
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 100%;
-    object-fit: cover;
-    height: 100vh;
-    @include tablet {
-      
-        }
-}
 </style>

@@ -25,7 +25,7 @@ $unit: 'rem';
 
 // Media Query
 $tablet: 768;
-$desktop: 1280;
+$desktop: 1140;
 
 @mixin tablet {
   @media only screen and (min-width: $tablet * 1px) {

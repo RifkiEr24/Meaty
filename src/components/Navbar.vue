@@ -10,14 +10,14 @@
            
 
             <li class="nav-item "><a class="nav-link" href="#">Gallery</a></li>
-            <li class="nav-item" id="dropdown"><a class="nav-link" href="#">Cart</a>
+            <li class="nav-item" id="dropdown"> <router-link :to="'cart'">Cart</router-link>
               <span class="badge" v-if="cart.length > 0">  {{cartItemCount}}</span>
                <div class="dropdown-content text-primary p-2">
                 <div v-if="cart.length === 0">
                   <p class="text-center">Oops.. Your Cart Still Empty</p>
                 </div>
                 <div v-else>
-                   <review-item  v-for="item in cart" :key="item.id" :cartItem="item"></review-item>
+                   <review-item  v-for="item in cart" :key="item.product.id" :cartItem="item"></review-item>
                  <div class="cart-item-footer pt-2 mt-2 ">
                    <button @click="clearCartItems" class="bg-primary p-1 ">Clear Cart</button>
                  
@@ -65,108 +65,109 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.badge {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 15px;
-  font-size: 12px;
-  right: 25px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #f9f9f9;
-  color: #2B2B2B;
-}
-.cart-item-footer{
-  border-top: 0.5px solid black;
-}
-button{
-  border: 0;
-  color: white;
-  border-radius: 5px;
-}
-</style>
 <style lang="scss" >
 @import "./../scss/_mixins.scss";
 
-.dropdown-content {
-  visibility: hidden;
-  position: absolute;
-  right: 10px;
-  background-color: #f9f9f9;
-  min-width: 350px;
+nav {
+  color: white;
+  display: flex;
+  width: 100%;
   top: 0;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-    opacity: 0;
-      transition: all 0.5s ease-in-out;
+  position: fixed;
+  background-color: #2B2B2B;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 1s ease;
+  z-index: 10;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 
-}
+  @include tablet {
+    background-color: transparent;
+  }
 
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  text-align: left;
-}
+  .brand-name {
+    font-weight: bold;
+    font-size: 21px;
+  }
 
-#dropdown:hover .dropdown-content {
-  visibility: visible;
-  opacity: 1;
-  transform: translate(0, 45px);
-  transition: all 0.5s ease-in-out;
+  ul {
+    display: none;
+    margin-left: auto;
+    list-style: none;
+    flex-direction: column;
+    ;
 
-}
-nav{
-    color: white;
-    display: flex;
-    width: 100%;
-    top: 0;
-    position: fixed;
-    background-color: #2B2B2B;
-    justify-content: space-between;
-    align-items: center;
-    transition: background-color 1s ease;
-    z-index: 10;
-        border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-     @include tablet {
-         background-color: transparent;
-        }
-    .brand-name{
-      font-weight: bold;
-      font-size: 21px;
+    @include tablet {
+      flex-direction: row;
+      display: flex;
     }
-    ul{
+
+    li {
+      @extend .mr-5;
+
+      a {
+        color: white;
+        font-weight: 600;
+      }
+
+      .badge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 15px;
+        font-size: 12px;
+        right: 25px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #f9f9f9;
+        color: #2B2B2B;
+      }
+
+      &#dropdown:hover {
+        .dropdown-content {
+          visibility: visible;
+          opacity: 1;
+          transform: translate(0, 45px);
+          transition: all 0.5s ease-in-out;
+        }
+      }
+
+      .dropdown-content {
+        visibility: hidden;
+        position: absolute;
+        right: 10px;
+        background-color: #f9f9f9;
+        min-width: 350px;
+        top: 0;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        opacity: 0;
+        transition: all 0.5s ease-in-out;
+
+        .cart-item-footer {
+          border-top: 0.5px solid black;
+        }
+
+        button {
+          border: 0;
+          color: white;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+
+  #hamburger {
+    font-size: 30px;
+    @extend .p-1;
+
+    @include tablet {
       display: none;
-      margin-left: auto;
-      list-style: none;
-      flex-direction: column;;
-        @include tablet {
-          flex-direction: row;
-          display: flex;
-        }
-      li{
-        @extend .mr-5;
-          a{
-            color:white;
-            font-weight: 600;
-          }
-        }
     }
-    #hamburger{
-      font-size: 30px;
-      @extend .p-1;
-      @include tablet {
-         display: none;
-        }
-    }
+  }
 }
 
 </style>

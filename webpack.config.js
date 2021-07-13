@@ -3,8 +3,8 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const htmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-
-
+const ImageminPlugin = require("imagemin-webpack");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const autoprefixer = require("autoprefixer");
 
 
@@ -75,7 +75,30 @@ chunkFilename: "[name].[contenthash:8].js",
         template: path.resolve(__dirname, "public", "index.html"),
         favicon: "./public/favicon.ico",
       }),
+      new ImageminPlugin({
+        bail: false, 
+        cache: true,
+        imageminOptions: {
+        
+          plugins: [
+            ["gifsicle", { interlaced: true }],
+            ["jpegtran", { progressive: true }],
+            ["optipng", { optimizationLevel: 5 }],
+            [
+              "svgo",
+              {
+                plugins: [
+                  {
+                    removeViewBox: false
+                  }
+                ]
+              }
+            ]
+          ]
+        }
+      }),
     new CleanWebpackPlugin(),
+    
   ],
   resolve: {
     alias: {
@@ -96,5 +119,10 @@ chunkFilename: "[name].[contenthash:8].js",
         },
       },
     },
+    minimizer: [
+      new UglifyJsPlugin({
+        test: /\.js(\?.*)?$/i,
+      }),
+    ],
   }
 };

@@ -2,6 +2,21 @@
   <div class="home">
     <hero />
     <div class="container">
+      <div class="flex featured-post">
+        <div class="p-2">
+       <span class="iconify featured-icon item-center" data-icon="bx:bx-dollar" data-inline="false"></span>
+          <p class="text-center">All Food you can eat with the same price, <span class="font-bold">Rp.35.000 !</span></p>
+        </div>
+         <div class="p-2">
+          <span class="iconify featured-icon  item-center" data-icon="ic:round-delivery-dining" data-inline="false"></span>
+          <p class="text-center">Order & deliver into your front door :)</p>
+          <p class="font-bold text-center">(Currently available for Bandung & Cimahi Only)</p>
+        </div>
+         <div class="p-2">
+         <span class="iconify featured-icon  item-center" data-icon="tabler:meat" data-inline="false"></span>
+         <p class="text-center">High Quality & Delicious Meat Resource !</p>
+        </div>
+      </div>
       <h2 class="mt-4 text-center">Restaurant Menu</h2>
       <div class="food-container">
         <h2 class="mt-4 text-center ">Beef</h2>
@@ -87,10 +102,20 @@ import ButttonPrimary from '../components/ButttonPrimary.vue'
 <style lang="scss" scoped>
   @import "./../scss/_responsive.scss";
 
-  .food-list {
-    flex-wrap: wrap;
-  }
 
+.featured-post{
+  flex-wrap: wrap;
+  @include tablet{
+    flex-wrap: nowrap;
+  }
+  div{
+    width: 100%;
+    .featured-icon{
+      width: 120px;
+      height: 120px;
+    }
+  }
+}
   .food-item {
     margin: 20px 0 0 20px;
     width: calc((100% / 2) - 20px);

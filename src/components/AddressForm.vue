@@ -85,7 +85,7 @@ methods:{
     }
     
 }
-input{
+input, textarea{
     padding: 0.5rem;
     width: 100%;
     border-radius: 15px;

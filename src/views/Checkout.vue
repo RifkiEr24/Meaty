@@ -26,6 +26,8 @@
                     <p>{{item.city}}, {{item.zipcode}}</p>
                 </div>
                 <buttton-primary class="mt-2" @button-click="show" :buttonText="'Choose Another Address'" />
+                <br>
+                <small>*Delivery Price : Rp.15.000 for Cimahi, Rp.30.000 For Bandung</small>
             </div>
             <div class="summary-container p-2 m-2 bg-white">
                 <h2>Cart Summary</h2>
@@ -110,7 +112,7 @@
                         type: 'success',
                         group: 'notification',
                         title: 'Complete',
-                        text: "Your Order Will be Processed, please wait. We'll serve it to you As soon as possible :) .. Thank You for purchasing on Meathycal",
+                        text: "Your Order Will be Processed, please wait. We'll deliver it to you As soon as possible :) .. Thank You for purchasing on Meathycal",
                         duration: 10000
                     })
                 ))

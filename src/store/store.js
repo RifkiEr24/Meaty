@@ -19,25 +19,25 @@ export default new Vuex.Store({
     getters: {
         foodBeef: state => {
             const foodBeef = state.food.filter(food => {
-                return food.ctr === "beef";
+                return food.ctr === "Beef";
             })
             return foodBeef;
         },
         foodChicken: state => {
             const foodBeef = state.food.filter(food => {
-                return food.ctr === "chicken";
+                return food.ctr === "Chicken";
             })
             return foodBeef;
         },
         foodLamb: state => {
             const foodLamb = state.food.filter(food => {
-                return food.ctr === "lamb";
+                return food.ctr === "Lamb";
             })
             return foodLamb;
         },
         foodPork: state => {
             const foodLamb = state.food.filter(food => {
-                return food.ctr === "pork";
+                return food.ctr === "Pork";
             })
             return foodLamb;
         },
@@ -152,63 +152,13 @@ export default new Vuex.Store({
     
     },
     actions: {
-        loadFoodChicken({
-            commit
-        }) {
+        fetchFood({commit},category) {
             axios
-                .get(data.foodlist('Chicken'))
+                .get(data.foodlist(category))
                 .then(response => {
                     let food = response.data.meals;
                     food.forEach(item => {
-                        item.ctr = "chicken";
-                    })
-                    commit('SET_FOOD', food);
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-        },
-        loadFoodBeef({
-            commit
-        }) {
-            axios
-                .get(data.foodlist('Beef'))
-                .then(response => {
-                    let food = response.data.meals;
-                    food.forEach(item => {
-                        item.ctr = "beef";
-                    })
-                    commit('SET_FOOD', food);
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-        },
-        loadFoodLamb({
-            commit
-        }) {
-            axios
-                .get(data.foodlist('Lamb'))
-                .then(response => {
-                    let food = response.data.meals;
-                    food.forEach(item => {
-                        item.ctr = "lamb";
-                    })
-                    commit('SET_FOOD', food);
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-        },
-        loadFoodPork({
-            commit
-        }) {
-            axios
-                .get(data.foodlist('Pork'))
-                .then(response => {
-                    let food = response.data.meals;
-                    food.forEach(item => {
-                        item.ctr = "pork";
+                        item.ctr = category;
                     })
                     commit('SET_FOOD', food);
                 })

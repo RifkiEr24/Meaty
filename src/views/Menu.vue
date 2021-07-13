@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "./../scss/_mixins.scss";
+  @import "./../scss/_responsive.scss";
   .menu-control {
     flex-direction: column;
 

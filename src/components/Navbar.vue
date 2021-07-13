@@ -5,17 +5,17 @@
       <div class="brand">
         <p class="brand-name p-1">Meathycal</p>
       </div>
-      <ul>
-        <li class="nav-item ">
+      <ul class="menu-desktop">
+        <li class="nav-item mr-5">
           <router-link :to="'/'">Home</router-link>
         </li>
-        <li class="nav-item ">
+        <li class="nav-item mr-5">
           <router-link :to="'menu'">Menu</router-link>
         </li>
-        <li class="nav-item ">
+        <li class="nav-item mr-5">
           <router-link :to="'gallery'">Gallery</router-link>
         </li>
-        <li class="nav-item" id="dropdown">
+        <li class="nav-item mr-5" id="dropdown">
           <router-link :to="'cart'">Cart</router-link>
           <span class="badge" v-if="cart.length > 0"> {{cartItemCount}}</span>
           <div class="dropdown-content text-primary p-2">
@@ -34,8 +34,26 @@
           </div>
         </li>
       </ul>
-      <a id="hamburger" aria-label="Hamburger">☰</a>
+
+      <a @click="toggle" id="hamburger" class="p-1" aria-label="Hamburger">☰</a>
     </nav>
+          <ul ref="mobileMenu" class="menu-mobile p-3 bg-primary text-white">
+              <li class="nav-item ">
+          <router-link :to="'/'">Home</router-link>
+        </li>
+        <li class="nav-item ">
+          <router-link :to="'menu'">Menu</router-link>
+        </li>
+        <li class="nav-item ">
+          <router-link :to="'gallery'">Gallery</router-link>
+        </li>
+        <li class="nav-item" id="dropdown">
+          <router-link :to="'cart'">Cart
+              <span class="badge" v-if="cart.length > 0"> {{cartItemCount}}</span>
+          </router-link>
+        
+        </li>
+      </ul>
   </header>
 </template>
 
@@ -64,15 +82,60 @@ export default {
      updateScroll() {
        this.scrollPosition = window.scrollY
     },
+    toggle(){
+      this.$refs.mobileMenu.classList.toggle('translate-normal');
+
+    }
   },
   mounted(){
         window.addEventListener('scroll', this.updateScroll);
-  }
+  },
 };
 </script>
 <style lang="scss" >
-@import "./../scss/_mixins.scss";
+@import "./../scss/_responsive.scss";
+// MOBILE NAV
+.menu-mobile{
+  position: fixed;
+  top: 0;
+  list-style: none;
+  width: 100%;
+  transform: translate(0, -200px);
+  transition: all 0.3s ease-in-out;
+  z-index: 2;
+   border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  @include tablet {
+    display: none;
+  }
+  li{
+    a{
+          position: relative;
 
+      color: white;
+      display: inline-block;
+    }
+    .badge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+       top: 0;
+       right: -20px;
+        font-size: 12px;
+
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #f9f9f9;
+        color: #2B2B2B;
+      }
+  }
+}
+.translate-normal{
+  transform: translate(0, 50px);
+}
+// DEFAULT / DESKTOP NAV
 nav {
   color: white;
   display: flex;
@@ -97,19 +160,22 @@ nav {
   }
 
   ul {
-    display: none;
+    &.menu-desktop{
+          display: none;
+    }
     margin-left: auto;
     list-style: none;
     flex-direction: column;
-    ;
 
     @include tablet {
       flex-direction: row;
-      display: flex;
+      &.menu-desktop{
+          display: flex;
+    }
+     
     }
 
     li {
-      @extend .mr-5;
 
       a {
         color: white;
@@ -167,8 +233,6 @@ nav {
 
   #hamburger {
     font-size: 30px;
-    @extend .p-1;
-
     @include tablet {
       display: none;
     }

@@ -2,6 +2,30 @@
 @import "./_variables.scss";
 // GLOBAL STYLE
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+font-family: 'Poppins', sans-serif; 
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+}
+body{
+    color: #2B2B2B;
+    background-color: #EDEDED;
+    margin: 0;
+    padding: 0;
+}
+// reset default style
+p{
+    margin: 0;
+}
+a{
+    text-decoration: none;
+}
+button{
+    cursor: pointer;
+}
+// color
 .bg-white{
     background-color: white;
 }
@@ -15,13 +39,12 @@
 .text-primary{
     color:$primary-color;
 }
+// sizing
 a,button,input[type=text]{
     min-width: 44px;
     min-height: 44px;
 }
-button{
-    cursor: pointer;
-}
+
 select,
 input ,textarea{
   min-height: 44px;
@@ -29,6 +52,7 @@ input ,textarea{
   border-radius: 10px;
   border: 0;
 }
+// grid styling
 .container{
     max-width: 1140px;
     margin-left: auto;
@@ -42,6 +66,7 @@ input ,textarea{
         justify-content: space-between;
     }
 }
+// helper
 .text-center{
     text-align: center;
 }
@@ -54,16 +79,14 @@ input ,textarea{
 .font-bold{
     font-weight: bold;
 }
-
+// custom notification
 .custom-notification {
-    // styling
   margin: 0 5px 5px;
   padding: 10px;
   font-size: 12px;
   color: #ffffff;
   
   border-left: 5px solid;
-    // types (green, amber, red)
     &.success {
       background: $primary-color;
       border-left-color:#141414 ;

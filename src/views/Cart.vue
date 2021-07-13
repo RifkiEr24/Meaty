@@ -1,5 +1,5 @@
 <template>
-  <div class="container flex mt-12 p-1">
+  <div :class=" { 'pb-25' : cart.length === 0 }" class="container flex pb-7 mt-12 ">
     <div class="cart-item-container p-2 m-2 bg-white">
       <h2>Cart</h2>
       <div v-if="cart.length === 0">
@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./../scss/_mixins.scss";
+@import "./../scss/_responsive.scss";
 .container.flex {
   flex-wrap: wrap;
   align-items: flex-start;

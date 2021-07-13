@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="flex mt-12 p-1">
+        <div class="flex mt-11 p-1">
             <modal name="addresslist" :scrollable="true" :height="'auto'" :adaptive="true">
                 <div class="p-2">
                     <div slot="top-right">
@@ -137,7 +137,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "./../scss/_mixins.scss";
+    @import "./../scss/_responsive.scss";
 
     .container {
         .flex {

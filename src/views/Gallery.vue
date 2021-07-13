@@ -37,27 +37,30 @@ this.createArrayRestaurant();
 </script>
 
 <style lang="scss" scoped>
-.img-gallery{
-    border-radius: 20px;
-    width: 100%;
-            transition: 0.3s ease-in-out;
-            &:hover{
-                padding: 0.5rem;
-            }
-
-}
 .item-container {
     -moz-column-width: 18em;
     -webkit-column-width: 18em;
     column-width: 18em;
     -moz-column-gap: 1em;
-    -webkit-column-gap:1em;
+    -webkit-column-gap: 1em;
     column-gap: 1em;
-}
-.item {
-    display: inline-block;
-    width: 100%;
-    padding: 30px;
-    margin: 5px;
+
+    .item {
+        display: inline-block;
+        width: 100%;
+        padding: 30px;
+        margin: 5px;
+
+        .img-gallery {
+            border-radius: 20px;
+            width: 100%;
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+                padding: 0.5rem;
+            }
+
+        }
+    }
 }
 </style>

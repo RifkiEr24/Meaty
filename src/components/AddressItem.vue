@@ -33,7 +33,7 @@ setAsMainAddress(){
 </script>
 
 <style lang="scss" scoped>
-@import "./../scss/_mixins.scss";
+@import "./../scss/_responsive.scss";
 
 .flex{
   border-bottom:1px solid #2B2B2B;
@@ -43,8 +43,5 @@ setAsMainAddress(){
     flex-direction: row;
   }
 }
-    .iconify{
-            width: 44px;
-            height: 44px;
-        }
+
 </style>

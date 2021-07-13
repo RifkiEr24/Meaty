@@ -70,7 +70,6 @@ import ButttonPrimary from '../components/ButttonPrimary.vue'
         ButttonPrimary
     },
     computed: {
-     
       ...mapGetters({
         beef: "foodBeef",
         chicken: "foodChicken",
@@ -86,7 +85,7 @@ import ButttonPrimary from '../components/ButttonPrimary.vue'
 </script>
 
 <style lang="scss" scoped>
-  @import "./../scss/_mixins.scss";
+  @import "./../scss/_responsive.scss";
 
   .food-list {
     flex-wrap: wrap;

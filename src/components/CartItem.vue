@@ -1,5 +1,5 @@
 <template>
-    <div class="flex cart-item mt-3">
+    <div class="flex cart-item mt-3 ">
         <label class="checkbox-container ">
             <input type="checkbox" @change=" selectedCartToggle" v-model="cartItem.selected">
             
@@ -84,6 +84,7 @@ input::-webkit-inner-spin-button {
 
     
 .cart-item{
+    border-bottom: solid 1px #2B2B2B;
     position: relative;
     min-height: 150px;
 }
@@ -95,7 +96,7 @@ input::-webkit-inner-spin-button {
 .cart-control{
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: 10px;
 }
 /* Custom checkbox */
 .checkbox-container {

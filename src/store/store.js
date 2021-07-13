@@ -5,14 +5,16 @@ import data from './../data/api-endpoint'
 import VuexPersistence from 'vuex-persist'
 const vuexLocal = new VuexPersistence({
     storage: window.localStorage,
-    reducer: (state) => ({ cart: state.cart }), //only save navigation module
+    reducer: (state) => ({ cart: state.cart, address:state.address }),
   })
+
 Vue.use(Vuex, axios);
 
 export default new Vuex.Store({
     state: {
         food: [],
         cart:[],
+        address:[]
     },
     getters: {
         foodBeef: state => {
@@ -56,8 +58,16 @@ export default new Vuex.Store({
                return item.quantity
             }).reduce((prev, curr) => prev + curr, 0);
             return selectedCart;
-            // return state.cart.length;  
-          }
+          },
+          selectedAddress: state => {
+            const selectedAdress = state.address.filter(address => {
+                return address.selected === true;
+            }).map(item =>{
+                console.log(item)
+                return item.address;
+            })
+            return selectedAdress;
+        }
     },
     mutations: {
         SET_FOOD(state, food) {
@@ -84,14 +94,12 @@ export default new Vuex.Store({
             })
         },
         INCREASE_CART_QUANTITY(state,{product, quantity}){
-            console.log(product);
             let productInCart = state.cart.find(item => {
                 return item.product.idMeal === product.idMeal
             })
             productInCart.quantity += quantity
         },
         DECREASE_CART_QUANTITY(state,{product, quantity}){
-            console.log(product);
             let productInCart = state.cart.find(item => {
                 return item.product.idMeal === product.idMeal
             })
@@ -113,7 +121,34 @@ export default new Vuex.Store({
         CLEAR_CART_ITEMS(state){
             state.cart = [];
         },
-        
+        ADD_ADDRESS(state, address){
+             
+            state.address = state.address.map(item=>{
+                item.selected = false;
+                return item;
+            })
+            const id = Date.now();
+            const selected= true;
+            state.address.push({
+                id,
+                address,
+                selected
+            })
+        },
+        SELECT_MAIN_ADDRESS(state, address){
+            state.address = state.address.map(item=>{
+                console.log(item);
+                item.selected = false;
+                return item;
+
+            });
+            address.selected = true;
+        },
+        REMOVE_ADDRESS(state, address){
+            state.address = state.address.filter(item => {
+                return item.id !== address.id
+            })
+        }
     
     },
     actions: {
@@ -201,6 +236,15 @@ export default new Vuex.Store({
         },
         toggleSelectedCart({commit},{product, selected}){
             commit('TOGGLE_SELECTED_CART',{product, selected})
+        },
+        addAddress({commit},address){
+            commit('ADD_ADDRESS',address)
+        },
+        selectMainAddress({commit},address){
+            commit('SELECT_MAIN_ADDRESS',address)
+        },
+        removeAddress({commit},address){
+            commit('REMOVE_ADDRESS',address)
         }
     },
     plugins: [vuexLocal.plugin],

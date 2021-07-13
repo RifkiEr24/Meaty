@@ -5,7 +5,7 @@ $unit: 'rem';
   $i: 0;
   @while $i <= $max {
     #{$className + $i} { 
-      #{$styleName}: #{($i/2) + $unit};
+      #{$styleName}: #{$i/2 + $unit};
     }
     $i: $i + $offset;
   }

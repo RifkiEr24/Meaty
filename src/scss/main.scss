@@ -8,13 +8,14 @@
 .text-white{
     color: white;
 }
+
 .bg-primary{
     background-color: $primary-color ;
 }
 .text-primary{
     color:$primary-color;
 }
-a,button{
+a,button,input[type=text]{
     min-width: 44px;
     min-height: 44px;
 }
@@ -33,3 +34,21 @@ button{
 .text-center{
     text-align: center;
 }
+.font-bold{
+    font-weight: bold;
+}
+.custom-notification {
+    // styling
+  margin: 0 5px 5px;
+  padding: 10px;
+  font-size: 12px;
+  color: #ffffff;
+  
+  border-left: 5px solid;
+    // types (green, amber, red)
+    &.success {
+      background: $primary-color;
+      border-left-color:#141414 ;
+    }
+
+  }

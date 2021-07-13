@@ -11,11 +11,11 @@
                  <p >
               {{item.product.strMeal}}
           </p>
-          <p>x{{item.quantity}}</p>
+          <p>x{{item.quantity}}(Rp.{{item.quantity * 35000}})</p>
           </div>
         <div class="flex summary-total summary-item mt-2 mb-2">
             <p>Total</p>
-            <p>x {{cartItemSelectedCount}} pcs</p>
+            <p>Rp. {{cartItemSelectedCount * 35000}}</p>
         </div>
        <router-link :to="'checkout'" class="bg-primary checkout p-1 text-white text-center ">Checkout</router-link>
       </div>

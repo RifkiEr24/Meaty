@@ -7,14 +7,18 @@
       >
         <router-view :class="{ 'pt-10': $route.path !== '/' }"/>
       </transition>
+      <notifications position="bottom right"  classes="custom-notification" group="notification" />
+    <footer/>
   </div>
 </template>
 <script>
 import Navbar from './components/Navbar.vue';
 import { mapActions} from 'vuex';
+import Footer from './components/Footer.vue';
 export default {
      components: {
-    Navbar
+    Navbar,
+          Footer
   },
   mounted(){
    this.loadFoodBeef();

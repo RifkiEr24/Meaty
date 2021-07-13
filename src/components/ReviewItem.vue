@@ -22,7 +22,12 @@ export default {
     },
     methods:{
         removeProductFromCart(product){
-            this.$store.dispatch('removeProductFromCart', product)
+            this.$store.dispatch('removeProductFromCart', product).then(this.$notify({
+            type: 'success',
+            group: 'notification',
+            title: 'Success',
+            text: 'Item Removed To Cart'
+            }))
         }
     }
 }

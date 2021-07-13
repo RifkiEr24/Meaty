@@ -28,6 +28,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "checkout" */ "../views/Checkout.vue"),
   },
+  {
+    path: "/gallery",
+    name: "Gallery",
+    component: () =>
+      import(/* webpackChunkName: "gallery" */ "../views/Gallery.vue"),
+  },
 ];
 
 const router = new VueRouter({

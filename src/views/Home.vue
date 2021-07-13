@@ -7,33 +7,46 @@
         <h2 class="mt-4 text-center ">Beef</h2>
         <div class="food-list flex">
           <div class="food-item p-1" v-for="item in beef.slice(0,8)" :key="item.id">
-            <food-item :food="item"/>
+            <food-item :food="item" />
           </div>
         </div>
+        <router-link :to="'menu'">
+          <buttton-primary class="item-center mt-2" :buttonText="'See More'" />
+        </router-link>
       </div>
       <div class="food-container">
         <h2 class="mt-4 text-center ">Chicken</h2>
         <div class="food-list flex">
           <div class="food-item p-1" v-for="item in chicken.slice(0,8)" :key="item.id">
-            <food-item :food="item"/>
+            <food-item :food="item" />
           </div>
         </div>
+        <router-link :to="'menu'">
+          <buttton-primary class="item-center mt-2" :buttonText="'See More'" />
+        </router-link>
+
       </div>
       <div class="food-container">
         <h2 class="mt-4 text-center ">Lamb</h2>
         <div class="food-list flex">
-           <div class="food-item p-1" v-for="item in lamb.slice(0,8)" :key="item.id">
-            <food-item :food="item"/>
+          <div class="food-item p-1" v-for="item in lamb.slice(0,8)" :key="item.id">
+            <food-item :food="item" />
           </div>
         </div>
+        <router-link :to="'menu'">
+          <buttton-primary class="item-center mt-2" :buttonText="'See More'" />
+        </router-link>
       </div>
       <div class="food-container">
         <h2 class="mt-4 text-center ">Pork</h2>
         <div class="food-list flex">
-           <div class="food-item p-1" v-for="item in pork.slice(0,8)" :key="item.id">
-            <food-item :food="item"/>
+          <div class="food-item p-1" v-for="item in pork.slice(0,8)" :key="item.id">
+            <food-item :food="item" />
           </div>
         </div>
+        <router-link :to="'menu'">
+          <buttton-primary class="item-center mt-2" :buttonText="'See More'" />
+        </router-link>
       </div>
     </div>
   </div>
@@ -45,6 +58,7 @@
   import {
     mapGetters
   } from 'vuex'
+import ButttonPrimary from '../components/ButttonPrimary.vue'
   export default {
     data() {
       return {
@@ -52,7 +66,8 @@
     },
     components: {
       Hero,
-      FoodItem
+      FoodItem,
+        ButttonPrimary
     },
     computed: {
      

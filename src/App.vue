@@ -1,14 +1,12 @@
 <template>
-  <div id="app">
-      <navbar />
-  <transition
-        name="fade"
-        mode="out-in"
-      >
-        <router-view :class="{ 'pt-10': $route.path !== '/' }"/>
-      </transition>
-      <notifications position="bottom right"  classes="custom-notification" group="notification" />
-    <footer/>
+  <div id="app ">
+    <navbar />
+    <transition name="fade" mode="out-in">
+      <router-view class="mb-10" :class="{ 'pt-10': $route.path !== '/' }" />
+    </transition>
+
+    <Footer />
+    <notifications position="bottom right" classes="custom-notification mb-5" group="notification" />
   </div>
 </template>
 <script>

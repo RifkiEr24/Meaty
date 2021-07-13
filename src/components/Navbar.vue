@@ -1,46 +1,51 @@
 <template>
   <header>
-    <nav v-scroll="updateScroll" class="nav p-1" id="drawer"  :class="{ 'bg-primary': $route.path !== '/' || scrollPosition > 20}">
+    <nav v-scroll="updateScroll" class="nav p-1" id="drawer"
+      :class="{ 'bg-primary': $route.path !== '/' || scrollPosition > 20}">
       <div class="brand">
-          <p class="brand-name p-1">Meathycal</p>
+        <p class="brand-name p-1">Meathycal</p>
       </div>
-        <ul>
-            <li class="nav-item "><router-link :to="'/'">Home</router-link></li>
-            <li class="nav-item "> <router-link :to="'menu'">Menu</router-link></li>
-           
-
-            <li class="nav-item "><a class="nav-link" href="#">Gallery</a></li>
-            <li class="nav-item" id="dropdown"> <router-link :to="'cart'">Cart</router-link>
-              <span class="badge" v-if="cart.length > 0">  {{cartItemCount}}</span>
-               <div class="dropdown-content text-primary p-2">
-                <div v-if="cart.length === 0">
-                  <p class="text-center">Oops.. Your Cart Still Empty</p>
-                </div>
-                <div v-else>
-                   <review-item  v-for="item in cart" :key="item.product.id" :cartItem="item"></review-item>
-                 <div class="cart-item-footer pt-2 mt-2 ">
-                   <button @click="clearCartItems" class="bg-primary p-1 ">Clear Cart</button>
-                 
-                 </div>
-                </div>
-                
-            
+      <ul>
+        <li class="nav-item ">
+          <router-link :to="'/'">Home</router-link>
+        </li>
+        <li class="nav-item ">
+          <router-link :to="'menu'">Menu</router-link>
+        </li>
+        <li class="nav-item ">
+          <router-link :to="'gallery'">Gallery</router-link>
+        </li>
+        <li class="nav-item" id="dropdown">
+          <router-link :to="'cart'">Cart</router-link>
+          <span class="badge" v-if="cart.length > 0"> {{cartItemCount}}</span>
+          <div class="dropdown-content text-primary p-2">
+            <div v-if="cart.length === 0">
+              <p class="text-center">Oops.. Your Cart Still Empty</p>
+            </div>
+            <div v-else>
+              <review-item v-for="item in cart" :key="item.product.id" :cartItem="item"></review-item>
+              <div class="cart-item-footer flex justify-between pt-2 mt-2 ">
+                <buttton-primary @button-click="clearCartItems" :buttonText="'Clear Cart'" />
+                <router-link to="cart">
+                  <buttton-primary :buttonText="'Check Cart'" />
+                </router-link>
               </div>
-            </li>
-           
-        </ul>
-         <a id="hamburger" aria-label="Hamburger">☰</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <a id="hamburger" aria-label="Hamburger">☰</a>
     </nav>
-
-  </header> 
+  </header>
 </template>
 
 <script>
 import ReviewItem from './ReviewItem.vue';
 import {mapGetters, mapState, mapActions} from 'vuex';
+import ButttonPrimary from './ButttonPrimary.vue';
 export default {
   name: 'Navbar',
-  components:{   ReviewItem },
+  components:{ ReviewItem, ButttonPrimary },
   data(){
    return{
       scrollPosition: null,  

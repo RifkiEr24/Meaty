@@ -1,18 +1,16 @@
 <template>
     <div class="container">
-        <div class="container flex mt-12 p-1">
-            <modal name="my-first-modal" :scrollable="true" :height="'auto'" :adaptive="true">
-
+        <div class="flex mt-12 p-1">
+            <modal name="addresslist" :scrollable="true" :height="'auto'" :adaptive="true">
                 <div class="p-2">
                     <div slot="top-right">
-                        <button @click="$modal.hide('foo')">
-                            ❌
-                        </button>
+                        <buttton-primary @button-click="$modal.hide('addresslist')" :buttonText="'X'" />
                     </div>
                     <h3 class="text-center">Choose Address Delivery</h3>
-                    <input type="text">
-                    <button @click="showAdd">Tambah Alamat Baru</button>
-                    <address-item v-for="item in address" :key="item.label" :addressData="item" />
+                    <input type="text" class="p-1" v-model="searchAddress"
+                        placeholder="Search Adress / Label / Receiver / .. Here">
+                    <buttton-primary class="item-center mt-2" @button-click="showAdd" :buttonText="'Add New Address'" />
+                    <address-item v-for="item in filteredData" :key="item.id" :addressData="item" />
                 </div>
             </modal>
             <modal name="add-address-modal" :adaptive="true" :height="'auto'">
@@ -27,133 +25,156 @@
                     <p>{{item.address}}</p>
                     <p>{{item.city}}, {{item.zipcode}}</p>
                 </div>
-                <button @click="show" class="bg-primary text-white p-1 mt-2">Pilih Alamat Lain</button>
-
+                <buttton-primary class="mt-2" @button-click="show" :buttonText="'Choose Another Address'" />
             </div>
             <div class="summary-container p-2 m-2 bg-white">
                 <h2>Cart Summary</h2>
-                <div class="flex summary-item">
+                <div class="flex summary-item justify-between">
                     <p>Total Harga ({{cartItemSelectedCount}} pcs)</p>
                     <p>Rp.{{cartItemSelectedCount * 30000}}</p>
                 </div>
-                     <div class="flex summary-item">
+                <div class="flex summary-item justify-between">
                     <p>Total Ongkos Kirim</p>
                     <p>Rp.{{deliveryPrice}}</p>
                 </div>
-                <div class="flex summary-total summary-item mt-2 mb-2">
+                <div class="flex summary-total justify-between summary-item mt-2 mb-2">
                     <p>Total</p>
                     <p>{{(cartItemSelectedCount * 30000) + deliveryPrice}}</p>
                 </div>
-                <button @click="order" class="bg-primary checkout p-1 text-white text-center ">Order Now
-                </button>
+                <buttton-primary class="item-center" @button-click="order" :buttonText="'Order Now'" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import {
-    mapState,
-    mapGetters,
-    mapActions
-} from 'vuex';
-import AddressForm from '../components/AddressForm.vue';
-import AddressItem from '../components/AddressItem.vue';
-export default {
-    components: {
-        AddressItem,
-        AddressForm
-    },
-    computed: {
-        deliveryPrice() {
-            let price;
-            this.selectedAddress.map(address => {
-                if (address.city === "cimahi") {
-                    price = 15000;
-                } else if (address.city === "bandung") {
-                    price = 30000;
-                }
-            })
-            return price
+    import {
+        mapState,
+        mapGetters,
+        mapActions
+    } from 'vuex';
+    import AddressForm from '../components/AddressForm.vue';
+    import AddressItem from '../components/AddressItem.vue';
+    import ButttonPrimary from '../components/ButttonPrimary.vue'
+    export default {
+        data() {
+            return {
+                allAddress: [],
+                searchAddress: '',
+            }
         },
-        ...mapGetters([
-            'selectedAddress',
-            'cartItemSelectedCount'
-        ]),
-        ...mapState([
-            'address'
-        ]),
-    },
-    methods: {
-        ...mapActions(['clearCartItems']),
-        order(){
-             this.$notify({
-                type: 'success',
-                group: 'notification',
-                title: 'Complete',
-                text: "Your Order Will be Processed, please wait. We'll serve it to you As soon as possible :) .. Thank You for purchasing on Meathycal",
-                duration: 10000
-            }).then(this.clearCartItems).then( this.$router.push('/'))
-           
+        components: {
+            AddressItem,
+            AddressForm,
+            ButttonPrimary
         },
-        show() {
-            this.$modal.show('my-first-modal');
+        computed: {
+            filteredData() {
+                return this.address.map(item => {
+                    return item
+                }).filter(addressData => {
+                    return addressData.address.address.toLowerCase().includes(this.searchAddress
+                            .toLowerCase()) ||
+                        addressData.address.receiver.toLowerCase().includes(this.searchAddress.toLowerCase()) ||
+                        addressData.address.label.toLowerCase().includes(this.searchAddress.toLowerCase()) ||
+                        addressData.address.city.toLowerCase().includes(this.searchAddress.toLowerCase()) ||
+                        addressData.address.telp.toLowerCase().includes(this.searchAddress.toLowerCase()) ||
+                        addressData.address.zipcode.toLowerCase().includes(this.searchAddress.toLowerCase())
+                })
+
+            },
+            deliveryPrice() {
+                let price;
+                this.selectedAddress.map(address => {
+                    if (address.city === "cimahi") {
+                        price = 15000;
+                    } else if (address.city === "bandung") {
+                        price = 30000;
+                    }
+                })
+                return price
+            },
+            ...mapGetters([
+                'selectedAddress',
+                'cartItemSelectedCount'
+            ]),
+            ...mapState([
+                'address'
+            ]),
         },
-        showAdd() {
-            this.$modal.hide('my-first-modal');
-            this.$modal.show('add-address-modal');
+        methods: {
+            ...mapActions(['clearCartItems']),
+            order() {
+                this.clearCartItems().then(this.$router.push('/').then(
+                    this.$notify({
+                        type: 'success',
+                        group: 'notification',
+                        title: 'Complete',
+                        text: "Your Order Will be Processed, please wait. We'll serve it to you As soon as possible :) .. Thank You for purchasing on Meathycal",
+                        duration: 10000
+                    })
+                ))
+
+
+                // .then(this.clearCartItems).then( this.$router.push('/'))
+
+            },
+            show() {
+                this.$modal.show('addresslist');
+            },
+            showAdd() {
+                this.$modal.hide('addresslist');
+                this.$modal.show('add-address-modal');
+            },
+            hide() {
+                this.$modal.hide('addresslist');
+            }
         },
-        hide() {
-            this.$modal.hide('my-first-modal');
+        mounted() {
+            this.allAddress = this.address;
         }
-    },
-    mounted() {
-        console.log(this.$store.state.address);
-         
     }
-}
 </script>
 
 <style lang="scss" scoped>
-@import "./../scss/_mixins.scss";
-input{
-    width: 100%;
-    border-radius: 15px;
-}
-.checkout{
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    max-width: 200px;
-}
-.container.flex{
-    flex-wrap: wrap;
-}
-.summary-item, .summary-container{
-    justify-content: space-between;
-}
-.summary-total{
-    border-top: 1px solid #2B2B2B;
-}
-.cart-item-container{
-      margin: 20px 0 0 20px;
-    width: 100%;
-   @include desktop {
- width: calc(60% - 20px);
-    }
-}
-.summary-container{
-      margin: 20px 0 0 20px;
-       width: 100%;
-   @include desktop {
- width: calc(40% - 20px);
-    
-}
-}
-.container{
-    align-items: flex-start;
-    .bg-white{
+    @import "./../scss/_mixins.scss";
+
+    .container {
+        .flex {
+            align-items: flex-start;
+
+        }
+
+        .bg-white {
             border-radius: 25px;
+        }
+
+        .cart-item-container {
+            margin: 10px 5px;
+            width: 100%;
+
+            @include desktop {
+                width: calc(60% - 10px);
+            }
+        }
+
+        .summary-container {
+            margin: 10px 5px;
+            width: 100%;
+
+            .summary-total {
+                border-top: 1px solid #2B2B2B;
+            }
+
+            @include desktop {
+                width: calc(40% - 10px);
+
+            }
+        }
     }
-}
+
+    input {
+        width: 100%;
+        border-radius: 15px;
+    }
 </style>

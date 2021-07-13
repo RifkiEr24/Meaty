@@ -11,13 +11,13 @@
             <h4>x{{cartItem.quantity}} pcs</h4>
         </div>
         <div class="cart-control flex">
-            <button @click="removeProductFromCart(cartItem.product)"> <span class="iconify text-primary"
-                    data-icon="clarity:trash-solid" data-inline="false"></span>
-            </button>
-            <button @click="reduceQuantityToCart">-</button>
+            <buttton-primary @button-click="removeProductFromCart(cartItem.product)" :buttonText="`<span style='width:15px; height:15px; color:white;' class='iconify text-primary'
+                    data-icon='clarity:trash-solid' data-inline='false'></span>`"/>
+        <buttton-primary :buttonText="'-'" @button-click="reduceQuantityToCart" />
             <input @change="changeQuantity($event)" type="number" min="1" :value="cartItem.quantity"
                 style="width:40px; text-align:center;" name="" id="">
-            <button @click="addQuantityToCart">+</button>
+        <buttton-primary :buttonText="'+'" @button-click="addQuantityToCart"/>
+            
         </div>
 
     </div>
@@ -27,7 +27,9 @@
 import {
     mapActions
 } from 'vuex';
+import ButttonPrimary from './ButttonPrimary.vue';
 export default {
+  components: { ButttonPrimary },
     props: ["cartItem"],
     methods: {
         ...mapActions(['increaseProductCartQuantity', 'decreaseProductCartQuantity', 'changeProductCartQuantity','toggleSelectedCart']),
@@ -72,10 +74,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-button{
-    border: 0;
-    background-color: transparent;
-}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -97,7 +96,9 @@ input::-webkit-inner-spin-button {
     position: absolute;
     right: 0;
     bottom: 10px;
+    gap:10px;
 }
+
 /* Custom checkbox */
 .checkbox-container {
     cursor: pointer;

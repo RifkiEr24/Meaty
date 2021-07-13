@@ -9,6 +9,7 @@ import VModal from 'vue-js-modal'
 import Notifications from 'vue-notification'
 
 import 'vue2-animate/dist/vue2-animate.min.css'
+
 Vue.use(VModal)
 Vue.use(Notifications)
 

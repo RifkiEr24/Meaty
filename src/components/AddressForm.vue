@@ -1,5 +1,8 @@
 <template>
    <div class="p-2">
+         <div slot="top-right">
+                        <buttton-primary @button-click="$modal.hide('add-address-modal')" :buttonText="'X'" />
+                    </div>
             <h3 class="text-center">Add New Address Delivery</h3>
             <form  @submit.prevent="test">
             <div class="form-group">
